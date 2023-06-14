@@ -1,9 +1,8 @@
 ﻿using CommandHandler.Test.Application.Commands;
 using CommandHandler.Test.Application.Handlers;
 using CommandHandler.Test.Mediator;
+using CommandHandler.Test.Service;
 using MediatR;
-using System.Net.NetworkInformation;
-using System.Reflection;
 
 namespace CommandHandler.Test
 {
@@ -21,11 +20,13 @@ namespace CommandHandler.Test
             services.AddSwaggerGen();
 
             //services.AddMediatR(Assembly.GetExecutingAssembly());
-            services.AddMediatR(cfg => {
+            services.AddMediatR(cfg =>
+            {
                 cfg.RegisterServicesFromAssembly(typeof(Startup).Assembly);
             });
             services.AddScoped<IMediatorHandler, MediatorHandler>();
             services.AddScoped<IRequestHandler<CreatePersonCommand, Unit>, PersonCommandHandler>();
+            services.AddHostedService<IntegrationHandler>();
 
         }
 

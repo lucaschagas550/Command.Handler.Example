@@ -1,5 +1,6 @@
 using CommandHandler.Test.Application.Commands;
 using CommandHandler.Test.Mediator;
+using CommandHandler.Test.Model;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CommandHandler.Test.Controllers
@@ -26,10 +27,14 @@ namespace CommandHandler.Test.Controllers
         [HttpGet(Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
         {
-            Console.WriteLine($"Start: {DateTime.Now.ToString("HH:mm:ss.fff")}");
-
+            //MediaTr
+            //Console.WriteLine($"Start: {DateTime.Now.ToString("HH:mm:ss.fff")}");
             //Cria uma thread para executar separada do processo
             //Task.Run(() => _mediator.SendCommand(new CreatePersonCommand("lucas", 25)));
+
+            //EventHandler com background service
+            Console.WriteLine($"Start: {DateTime.Now.ToString("HH:mm:ss.fff")}");
+            MeuEvento.DispararEvento();
 
             Console.WriteLine($"End: {DateTime.Now.ToString("HH:mm:ss.fff")}");
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
