@@ -45,5 +45,26 @@ namespace CommandHandler.Test.Controllers
             })
             .ToArray();
         }
+
+        [HttpGet("teste")]
+        public IEnumerable<WeatherForecast> GetTest()
+        {
+            var jobWrapper = new JobWrapper();
+
+            // Subscribe to the JobCompleted event
+
+            jobWrapper.StartJob();
+            //Console.WriteLine($"Start: {DateTime.Now.ToString("HH:mm:ss.fff")}");
+            //MeuEvento.DispararEvento();
+
+            //Console.WriteLine($"End: {DateTime.Now.ToString("HH:mm:ss.fff")}");
+            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            {
+                Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
+                TemperatureC = Random.Shared.Next(-20, 55),
+                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
+            })
+            .ToArray();
+        }
     }
 }
